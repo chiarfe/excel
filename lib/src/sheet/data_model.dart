@@ -4,7 +4,7 @@ part of excel;
 class Data extends Equatable {
   CellStyle? _cellStyle;
   late dynamic _value;
-  CellType _cellType = CellType.String;
+  CellType _cellType = CellType.generic;
   late Sheet _sheet;
   late String _sheetName;
   bool _isFormula = false;
@@ -35,7 +35,7 @@ class Data extends Equatable {
     dynamic value_,
     CellStyle? cellStyleVal,
     bool isFormulaVal = false,
-    CellType cellTypeVal = CellType.String,
+    CellType cellTypeVal = CellType.generic,
   }) {
     _sheet = sheet;
     _value = value_;

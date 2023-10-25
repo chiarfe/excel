@@ -361,6 +361,23 @@ class Save {
       _BorderSet _bs = _createBorderSetFromCellStyle(cellStyle);
       int borderIndex = innerBorderSet.indexOf(_bs);
 
+      const Map<CellType, String> dataTypeToNumFmtId = {
+        CellType.generic: '0',
+        CellType.integer: '1',
+        CellType.double: '2',
+        CellType.currency: '164',
+        CellType.date: '14',
+        CellType.time: '20',
+        CellType.dateTime: '22',
+        CellType.percentage: '10',
+        CellType.fraction: '12',
+        CellType.scientific: '11',
+        CellType.text: '49',
+        CellType.boolean: '49',
+        CellType.error: '27',
+        CellType.formula: '0',
+      };
+
       var attributes = <XmlAttribute>[
         XmlAttribute(XmlName('borderId'),
             '${borderIndex == -1 ? 0 : borderIndex + _excel._borderSetList.length}'),
@@ -368,8 +385,10 @@ class Save {
             '${backgroundIndex == -1 ? 0 : backgroundIndex + _excel._patternFill.length}'),
         XmlAttribute(XmlName('fontId'),
             '${fontIndex == -1 ? 0 : fontIndex + _excel._fontStyleList.length}'),
-        XmlAttribute(XmlName('numFmtId'), '0'),
+        XmlAttribute(XmlName('numFmtId'), dataTypeToNumFmtId[cellStyle.type]!),
         XmlAttribute(XmlName('xfId'), '0'),
+        if (cellStyle.type != CellType.generic)
+          XmlAttribute(XmlName('applyNumberFormat'), '1'),
       ];
 
       if ((_excel._patternFill.contains(backgroundColor) ||

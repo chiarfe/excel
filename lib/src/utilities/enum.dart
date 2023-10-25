@@ -29,11 +29,20 @@ enum HorizontalAlign {
 ///`Cell Type`
 ///
 enum CellType {
-  String,
-  int,
-  Formula,
+  generic,
+  integer,
   double,
-  bool,
+  currency,
+  date,
+  time,
+  dateTime,
+  percentage,
+  fraction,
+  scientific,
+  text,
+  boolean,
+  error,
+  formula,
 }
 
 ///

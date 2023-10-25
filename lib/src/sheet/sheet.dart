@@ -1196,15 +1196,15 @@ class Sheet {
   CellType _getCellType(var type) {
     switch (type) {
       case int:
-        return CellType.int;
+        return CellType.integer;
       case double:
         return CellType.double;
       case bool:
-        return CellType.bool;
+        return CellType.boolean;
       case Formula:
-        return CellType.Formula;
+        return CellType.formula;
       default:
-        return CellType.String;
+        return CellType.generic;
     }
   }
 

@@ -3,6 +3,7 @@ part of excel;
 /// Styling class for cells
 // ignore: must_be_immutable
 class CellStyle extends Equatable {
+  CellType _type = CellType.generic;
   String _fontColorHex = 'FF000000', _backgroundColorHex = 'none';
   String? _fontFamily;
   HorizontalAlign _horizontalAlign = HorizontalAlign.Left;
@@ -21,6 +22,7 @@ class CellStyle extends Equatable {
   bool _diagonalBorderDown = false;
 
   CellStyle({
+    CellType type = CellType.generic,
     String fontColorHex = 'FF000000',
     String backgroundColorHex = 'none',
     int? fontSize,
@@ -40,6 +42,8 @@ class CellStyle extends Equatable {
     bool diagonalBorderUp = false,
     bool diagonalBorderDown = false,
   }) {
+    _type = type;
+
     _textWrapping = textWrapping;
 
     _bold = bold;
@@ -76,6 +80,7 @@ class CellStyle extends Equatable {
   }
 
   CellStyle copyWith({
+    CellType? type,
     String? fontColorHexVal,
     String? backgroundColorHexVal,
     String? fontFamilyVal,
@@ -96,6 +101,7 @@ class CellStyle extends Equatable {
     bool? diagonalBorderDownVal,
   }) {
     return CellStyle(
+      type: type ?? this._type,
       fontColorHex: fontColorHexVal ?? this._fontColorHex,
       backgroundColorHex: backgroundColorHexVal ?? this._backgroundColorHex,
       fontFamily: fontFamilyVal ?? this._fontFamily,
@@ -115,6 +121,12 @@ class CellStyle extends Equatable {
       diagonalBorderUp: diagonalBorderUpVal ?? this._diagonalBorderUp,
       diagonalBorderDown: diagonalBorderDownVal ?? this._diagonalBorderDown,
     );
+  }
+
+  ///Get Type
+  ///
+  CellType get type {
+    return _type;
   }
 
   ///Get Font Color
@@ -343,6 +355,7 @@ class CellStyle extends Equatable {
 
   @override
   List<Object?> get props => [
+        _type,
         _bold,
         _rotation,
         _italic,
